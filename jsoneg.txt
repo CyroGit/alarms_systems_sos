@@ -1,0 +1,1 @@
+{    "Estado_Bateria ": 0,    "Estado_Puerta_Gabinete ": 0,    "Estado_Micrófono_Parlante": 1,    "Estado_Exceso_Temperatura": 0,    "Estado_Golpeado": 1,    "Estado_Caido": 1,    "Estado_SOS": "REGISTER",    "Variable_Voltaje_Bateria": 12.7,    "Variable_Temperatura": 23,    "Variable_Tilt": 0,    "Variable_Inclinación": 0}

@@ -1,0 +1,20 @@
+{
+    "sql_server": {
+        "driver": "SQL SERVER",
+        "server": "10.10.10.26,1433",
+        "database": "NewIwim_peru",
+        "username": "sa",
+        "password": "mls-0360"
+    },
+    "mqtt": {
+        "broker": "localhost",
+        "port": 1883,
+        "topic": "test",
+        "user":"test",
+        "pass":"test"
+    },
+    "serial":{
+        "com":"COM1",
+        "baudrate":9200
+    }
+}
