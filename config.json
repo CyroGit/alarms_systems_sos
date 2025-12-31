@@ -2,7 +2,7 @@
     "sql_server": {
         "driver": "SQL SERVER",
         "server": "10.10.10.26,1433",
-        "database": "NewIwim_peru",
+        "database": "ECB_COL",
         "username": "sa",
         "password": "mls-0360"
     },

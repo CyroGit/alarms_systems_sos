@@ -1,6 +1,7 @@
 import time
 import threading
 import json 
+from app.database import bd
 from app.mqtt.mqttcli import mqttcli # Asegúrate de que la clase se llame así
 from app.dto.alarma import AlarmaDTO
 from app.helper import decode
@@ -39,6 +40,7 @@ def int_serial():
     my_serial.start()
     return my_serial
 def main():
+    bd.get_postes()
     mqtt_instance = init_mqtt()
     serial_instance = int_serial()
 

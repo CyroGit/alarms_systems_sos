@@ -12,4 +12,39 @@ conn = pyodbc.connect(
     f"UID={config['sql_server']['username']};"
     f"PWD={config['sql_server']['password']};"
 )
-cursor = conn.cursor()
+
+
+# Función para ejecutar el procedimiento almacenado
+def insertar_con_sp(dato):
+    cursor = conn.cursor()
+    params = (
+        dato['vehicle_count'], dato['idequipo'], dato['timestamp'],
+        dato['boardtemp'], dato['lane'], dato['class'], dato['speed_kph'], dato['gvw_kg'],
+        dato['total_length_cm'], dato['axle_count'],
+        dato['axlw1'], dato['axls1'],
+        dato['axlw2'], dato['axls2'],
+        dato['axlw3'], dato['axls3'],
+        dato['axlw4'], dato['axls4'],
+        dato['axlw5'], dato['axls5'],
+        dato['axlw6'], dato['axls6'],
+        dato['axlw7'], dato['axls7'],
+        dato['axlw8'], dato['axls8'],
+        dato['axlw9'], dato['axls9'],
+        dato['axlw10'], dato['axls10'],
+        dato['axlw11'], dato['axls11'],
+        dato['origenfile']
+    )
+    sql = "EXEC SP_AddPesajeDAW200 ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?"
+    cursor.execute(sql, params)
+    conn.commit()
+    cursor.close()
+    conn.close()
+def get_postes():
+    cursor = conn.cursor()
+    sql ="EXEC dbo.SP_GetInfoPostes"
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
+    cursor.close()
+    conn.close()
