@@ -42,8 +42,6 @@ class SerialReader:
 
     def start(self):
         """Inicia el hilo lector."""
-        print("Serial reader thread started.")
-
         self.running = True
         self.thread = threading.Thread(target=self._reader_thread, daemon=True)
         self.thread.start()

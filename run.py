@@ -6,6 +6,7 @@ from app.mqtt.mqttcli import mqttcli # Asegúrate de que la clase se llame así
 from app.dto.alarma import AlarmaDTO
 from app.helper import decode
 from app.serial.serialat import SerialReader
+from app.control import statuspostes
 
 with open("config.json", "r") as file:
     config = json.load(file)
@@ -39,8 +40,9 @@ def int_serial():
     my_serial = SerialReader("COM1",9200,callback=onDataSerial)
     my_serial.start()
     return my_serial
+
 def main():
-    bd.get_postes()
+    #bd.get_postes()
     mqtt_instance = init_mqtt()
     serial_instance = int_serial()
 
@@ -54,7 +56,10 @@ def main():
        while True: # Mantiene el programa vivo
             time.sleep(1)
     except KeyboardInterrupt:
-         print("Cerrando aplicación...")
+        statuspostes.stop_timer_get_poste()
+        serial_instance.stop()
+        mqtt_instance.stop()
+        print("Cerrando aplicación...")
     
 
 if __name__ == "__main__":

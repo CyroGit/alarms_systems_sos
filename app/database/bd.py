@@ -40,11 +40,52 @@ def insertar_con_sp(dato):
     cursor.close()
     conn.close()
 def get_postes():
-    cursor = conn.cursor()
-    sql ="EXEC dbo.SP_GetInfoPostes"
-    cursor.execute(sql)
-    rows = cursor.fetchall()
-    for row in rows:
-        print(row)
-    cursor.close()
-    conn.close()
+    try:
+        cursor = conn.cursor()
+        sql ="EXEC dbo.SP_GetInfoPostes"
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+        #for row in rows:
+            #print(row)
+        cursor.close()
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        if 'conn' in locals():
+            conn.close()
+
+def status_poste():
+    try:
+        conn = pyodbc.connect(f"DRIVER={config['sql_server']['driver']};"
+        f"SERVER={config['sql_server']['server']};"
+        f"DATABASE={config['sql_server']['database']};"
+        f"UID={config['sql_server']['username']};"
+        f"PWD={config['sql_server']['password']};")
+        cursor = conn.cursor()
+        
+        # 2. Ejecutar la consulta
+        cursor.execute("EXEC SP_GetEstadoPostes")
+        
+        # 3. Obtener nombres de columnas y convertir a lista de diccionarios
+        # cursor.description contiene los metadatos de las columnas
+        columns = [column[0] for column in cursor.description]
+        rows = [dict(zip(columns, row)) for row in cursor.fetchall()]
+        
+        # 4. Crear un ÍNDICE en memoria para búsquedas rápidas por ID
+        # Esto transforma la lista en: { 101: {'nombre': 'Ana', ...}, 102: {...} }
+        usuarios_indexados = {u['IdPoste']: u for u in rows}
+        print (rows)
+        # --- EJEMPLO DE BÚSQUEDA ---
+        #id_a_buscar = 101
+        
+        #if id_a_buscar in usuarios_indexados:
+        #    usuario = usuarios_indexados[id_a_buscar]
+        #    print(f"✅ Usuario encontrado: {usuario['nombre']} ({usuario['departamento']})")
+        #else:
+        #    print("❌ El ID no existe en los registros descargados.")
+
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        if 'conn' in locals():
+            conn.close()
