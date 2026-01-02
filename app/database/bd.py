@@ -73,8 +73,9 @@ def status_poste():
         
         # 4. Crear un ÍNDICE en memoria para búsquedas rápidas por ID
         # Esto transforma la lista en: { 101: {'nombre': 'Ana', ...}, 102: {...} }
-        usuarios_indexados = {u['IdPoste']: u for u in rows}
-        print (rows)
+        #poste_indexados = {u['IdPoste']: u for u in rows}
+        #print (rows)
+        return rows
         # --- EJEMPLO DE BÚSQUEDA ---
         #id_a_buscar = 101
         

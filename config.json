@@ -16,5 +16,11 @@
     "serial":{
         "com":"COM1",
         "baudrate":9200
+    },
+    "sistema":{
+        "intervalgetstatus": 30,
+        "intervalcontrolstatus":86400
+        
     }
+
 }
