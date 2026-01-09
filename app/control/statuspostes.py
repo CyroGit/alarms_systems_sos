@@ -32,13 +32,13 @@ def control_postes(intervalo, stop_event):
                     fecha_poste = datetime.strptime(fecha_poste, "%d/%m/%Y %H:%M:%S")
 
 
-                print(f"💡 Poste: ID {poste.get('IdPoste')} - Última actualización: {fecha_poste}")
+                print(f"💡 Poste: ID {poste['IdPoste']} - Última actualización: {fecha_poste}")
                 
 
                 if fecha_poste < fecha_delta:
-                    print(f"⚠️ Poste desactualizado: ID {poste.get('IdPoste')} - Última actualización: {fecha_poste}")
+                    print(f"⚠️ Poste desactualizado: ID {poste['IdPoste']} - Última actualización: {fecha_poste}")
                     # Aquí puedes realizar la lógica para el usuario o departamento
-                    bd.ChangeEstadoPoste((poste.get('IdPoste'),"I"))
+                    bd.ChangeEstadoPoste((poste['IdPoste'],"I"))
                     encontrado = True
             
             if not encontrado:
@@ -48,12 +48,15 @@ def control_postes(intervalo, stop_event):
             print(f"Error: {e}")
         
         stop_event.wait(intervalo)
-try:
-    stop_bandera = threading.Event()
-    hilo = threading.Thread(target=control_postes, args=(intervalorconsulta, stop_bandera))
-    hilo.start()
-except KeyboardInterrupt:
-         print("Cerrando aplicación...")
+
+stop_bandera = threading.Event()
+def start_timer_get_poste():
+    try:
+        
+        hilo = threading.Thread(target=control_postes, args=(intervalorconsulta, stop_bandera))
+        hilo.start()
+    except KeyboardInterrupt:
+            print("Cerrando aplicación...")
 
 
 # Para detenerlo en cualquier momento:

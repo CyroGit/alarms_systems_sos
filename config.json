@@ -9,7 +9,7 @@
     "mqtt": {
         "broker": "localhost",
         "port": 1883,
-        "topic": "test",
+        "topic": "+/alerts",
         "user":"test",
         "pass":"test"
     },

@@ -33,9 +33,10 @@ class mqttcli:
         #global  countpasada 
         #countpasada += 1
     
-        #topic_parts = message.topic.split('/')
+        topic_parts = message.topic.split('/')
+        #print (topic_parts)
         #lane = topic_parts[-1]  # Get the last part of the topic, which is the lane number
-        self.mqtt_ondata(message.payload.decode('utf-8'))
+        self.mqtt_ondata(message.payload.decode('utf-8'),topic_parts)
         ## Check if the lane is numeric (representing a valid lane number)
         #if not lane.isdigit():
         #    print("\n" + "_"*80 + "\n")

@@ -1,0 +1,62 @@
+[
+  {
+    "ID_Alarma": 1,
+    "Alarma": "Voltaje Batería Bajo",
+    "mqtt": "Estado_Bateria",
+    "Descripcion": null
+  },
+  {
+    "ID_Alarma": 2,
+    "Alarma": "Voltaje Panel Solar Bajo",
+    "mqtt": "",
+    "Descripcion": null
+  },
+  {
+    "ID_Alarma": 3,
+    "Alarma": "Estado_Puerta_Gabinete",
+    "mqtt": "",
+    "Descripcion": null
+  },
+  {
+    "ID_Alarma": 4,
+    "Alarma": "Presencia de Alguien",
+    "mqtt": "",
+    "Descripcion": null
+  },
+  {
+    "ID_Alarma": 5,
+    "Alarma": "Temperatura Interna Excedida",
+    "mqtt": "Estado_Exceso_Temperatura",
+    "Descripcion": null
+  },
+  {
+    "ID_Alarma": 6,
+    "Alarma": "Teléfono Caído",
+    "mqtt": "Estado_Caido",
+    "Descripcion": null
+  },
+  {
+    "ID_Alarma": 7,
+    "Alarma": "Teléfono Golpeado",
+    "mqtt": "Estado_Golpeado",
+    "Descripcion": null
+  },
+  {
+    "ID_Alarma": 8,
+    "Alarma": "Error Electrónica",
+    "mqtt": "",
+    "Descripcion": null
+  },
+  {
+    "ID_Alarma": 9,
+    "Alarma": "Falla Micrófono/Parlante",
+    "mqtt": "Estado_Microfono_Parlante",
+    "Descripcion": null
+  },
+  {
+    "ID_Alarma": 10,
+    "Alarma": "Falla Comunicación",
+    "mqtt": "",
+    "Descripcion": null
+  }
+]

@@ -33,10 +33,18 @@ def get_postes():
         cursor = conn.cursor()
         sql ="EXEC dbo.SP_GetInfoPostes"
         cursor.execute(sql)
-        rows = cursor.fetchall()
+        # Obtener nombres de columnas y convertir a lista de diccionarios
+        # cursor.description contiene los metadatos de las columnas
+        columns = [column[0] for column in cursor.description]
+        rows = [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+        #poste_indexados = {u['IdPoste']: u for u in rows}
         #for row in rows:
             #print(row)
-        cursor.close()
+        cursor.close()   
+        
+        return rows
+       
     except Exception as e:
         print(f"Error: {e}")
     finally:
