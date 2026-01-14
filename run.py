@@ -12,6 +12,7 @@ from app.helper import decode
 from app.serial.serialat import SerialReader
 from app.control import statuspostes
 from app.control import controlserial
+import acercade
 
 try:
     with open("config.json", "r") as file:
@@ -25,15 +26,15 @@ try:
 except Exception as e:
         print(f"Error alarms file: {e}")  
 
-
-
-try:
-    DataPostes = bd.get_postes()
-    print (f"Postes rescatados count: {len(DataPostes)}")
-    poste_indexados = {u['IdPoste']: u for u in DataPostes}
-    #print (poste_indexados)
-except Exception as e:
-        print(f"Error Info postes: {e}")
+DataPostes = None
+def Get_postes():
+    try:
+        DataPostes = bd.get_postes()
+        print (f"Postes rescatados count: {len(DataPostes)}")
+        poste_indexados = {u['IdPoste']: u for u in DataPostes}
+        #print (poste_indexados)
+    except Exception as e:
+            print(f"Error Info postes: {e}")
 
 # ======================= Bloque MQTT ============================================
 def onDataMqtt(Databuffer, topic): # El callback debe recibir los argumentos que envía tu clase
@@ -43,7 +44,7 @@ def onDataMqtt(Databuffer, topic): # El callback debe recibir los argumentos que
         data = decode.stringjson(Databuffer) 
         for key in data:
             if key in data and data[key] is not None:
-                if  data[key] ==1 :
+                if  data[key] == 1 :
                     print (f"Existe Alarma {key} y su valor es: {data[key]}")
                     for alarm in tupleAlarms:
                         if alarm['mqtt'] == key :
@@ -106,7 +107,9 @@ def int_serial():
 def main():
     #bd.get_postes()
     #statuspostes.stop_timer_get_poste()
-    #statuspostes.start_timer_get_poste()
+    statuspostes.start_timer_get_poste()
+    Get_postes()
+
     mqtt_instance = init_mqtt()
     serial_instance = int_serial()
 
@@ -130,5 +133,5 @@ if __name__ == "__main__":
     #texto = '"+56995999621,"","25/10/02, 12:53:49-12"'
     #valor = texto.replace('"', '').split(',')
     #print (valor)
-   
+    acercade.initprogrampat()
     main()
